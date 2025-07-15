@@ -23,3 +23,17 @@ console.log(`The type of ${dollarSign} is: ${typeof dollarSign}`);
 console.log(`The capital letter A is: ${aCapitalLetter}`);
 console.log(`The tic mark is: ${tic}`);
 console.log(`The hiragana character is: ${hiragana}`);
+
+
+const school = "CodeMonster7.Academy";
+let schoolUpperCase = "";
+
+for (let i = 0; i < school.length; i++) {
+    if (school[i] === ".") {
+        schoolUpperCase += " ";
+    } else {
+        schoolUpperCase += school[i].toUpperCase();
+    }
+}
+
+console.log(`The school name is: ${schoolUpperCase}`); // The school name is: CODEMONSTER7 ACADEMY

@@ -24,6 +24,33 @@ for (let i = 0; i < grades.length; i++) {
     }
 }
 
+let sumForOf = 0;
+for (const grade of grades) {
+    console.log(`Grade: ${grade}`); // Grade: 10, Grade: 9, ..., Grade: 11
+    sumForOf += grade;
+}
+console.log(`Sum of grades using for...of: ${sumForOf}`); // Sum of grades using for...of: 66
+console.log(`Average of grades using for...of: ${(sumForOf / grades.length).toFixed(2)}`); // Average of grades using for...of: 6.00
+
+const numbers = [100, 200, 300, 400, 500, 600];
+for(let i = numbers.length - 1; i >= 0; i--) {
+    console.log(`Number: ${numbers[i]}`); // Number: 600, Number: 500, ..., Number: 100
+}
+
+for(let i = numbers.length - 1; i >= 0; i -= 2) {
+    console.log(`Number with step 2: ${numbers[i]}`); // Number with step 2: 600, Number with step 2: 400, Number with step 2: 200
+}
+
+for(let i = numbers.length - 1; numbers[i] > 300; i -= 2) {
+    console.log(`Number greater than 300: ${numbers[i]}`); // Number greater than 300: 600, Number greater than 300: 400
+}
+
+let evenNumbers = [];
+for (let i = 0; i <= 100; i += 2) {
+    evenNumbers.push(i);
+}
+console.log(`Even numbers from 0 to 100: ${evenNumbers}`); // Even numbers from 0 to 100: 0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98
+
 const emptyArray = [,,,];
 console.log(emptyArray.length)
 console.log(emptyArray[0])
