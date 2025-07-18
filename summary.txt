@@ -1,15 +1,1557 @@
-animals
-arithmetic-operators
-arrays
-arrow-functions
-boolean-type
-coersion
-comparison-operators
-expression-functions
-functions
-logic-operators
-number-types
-scope
-string-type
-symbol-type
-variables
+=== animals.js ===
+class Animal {
+    constructor(name){
+        this.name = name;
+    }
+    makeSound(){
+        console.log(`${this.name} makes a sound.`);
+        
+    }
+}
+
+class Lion extends Animal {
+    constructor(name) {
+        super(name);
+    }
+    makeSound() {
+        console.log(`${this.name} roars.`);
+    }
+}
+
+class Parrot extends Animal {
+    constructor(name) {
+        super(name);
+    }
+    makeSound() {
+        console.log(`${this.name} squawks. I want a cracker!`);
+    }
+}
+
+class Snake extends Animal {
+    constructor(name) {
+        super(name);
+    }
+    makeSound() {
+        console.log(`${this.name} hisses.`);
+    }
+}
+
+const lion = new Lion("Simba");
+lion.makeSound();
+const parrot = new Parrot("Polly");
+parrot.makeSound();
+const snake = new Snake("Seleste");
+snake.makeSound();
+
+=== arithmetic-operators.js ===
+const gradeFirstBimester = 8;
+const gradeSecondBimester = 6.3;
+const gradeThirdBimester = 7;
+const gradeFourthBimester = 9.3;
+
+let averageGrade = (gradeFirstBimester + gradeSecondBimester + gradeThirdBimester + gradeFourthBimester) / 4;
+console.log('Average grade: ', averageGrade.toFixed(2)); // This will output the average grade rounded to two decimal places (7.65)
+
+if(averageGrade >= 7){
+    averageGrade += averageGrade * 0.1;
+}
+
+console.log(`Adjusted average grade: ${averageGrade.toFixed(2)}`); // This will output the adjusted average grade rounded to two decimal places (7.65 + 0.1 * 7.65)
+
+/*
+Precedence of arithmetic operators:
+1. Parentheses `()`
+2. Exponentiation `**`
+3. Multiplication `*`, Division `/`, and Modulus `%`
+4. Addition `+` and Subtraction `-`
+5. Assignment `=`
+Note: The precedence of operators can affect the result of expressions, so it's important to use parentheses to clarify the order of operations when necessary.
+*/
+
+let result;
+result = 10 + 5 * 2 / 3 - 7 + 15 * 3 / 5 + 20 - 4 * 2;
+console.log("The result is: ", result);
+
+/*
+first- 5 * 2 = 10
+second- 10 / 3 ≈ 3.333
+third- 15 * 3 = 45
+fourth- 45 / 5 = 9
+fifth- 4 * 2 = 8
+*/
+
+result = 10 + ((5 * 2) / 3) - 7 + ((15 * 3) / 5) + 20 - (4 * 2);
+console.log("The result is: ", result);
+
+let i = 5;
+console.log(i++); // Output: 5 (i is printed before incrementing)
+console.log(i);   // Saída: 6 (i incremented after printing)
+
+let j = 5;
+console.log(++j); // Output: 6 (j is incremented before printing)
+console.log(j);   // Output: 6 (j remains incremented)
+
+=== arrays.js ===
+const grades = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+const mean = (grades[0] + grades[1] + grades[2] + grades[3] + grades[4] + grades[5] + grades[6] 
+    + grades[7] + grades[8] + grades[9]) / grades.length;
+
+console.log(`Mean of grades: ${mean}`); // Mean of grades: 55
+
+const mixedArray = [1, 'Hello', true, null, undefined, { name: 'John' }, [1, 2, 3]];
+
+grades.push(11); // Adding a new grade to the grades array
+console.log(`Updated grades: ${grades}`); // Updated grades: 10,9,8,7,6,5,4,3,2,1,11
+
+//first expression of the for loop is the initialization, 
+// the second is the condition to continue looping, 
+// and the third is the increment or decrement operation
+// The for loop iterates through the grades array, logging each grade and calculating the sum
+let sum = 0;
+for (let i = 0; i < grades.length; i++) {
+    console.log(`Grade ${i + 1}: ${grades[i]}`); // Grade 1: 10, Grade 2: 9, ..., Grade 11: 11
+    sum += grades[i];
+    if (i === (grades.length - 1)) {
+        console.log(`Sum of grades: ${sum}`); // Sum of grades: 66
+        console.log(`Average of grades: ${(sum / grades.length).toFixed(2)}`); // Average of grades: 6.00
+    }
+}
+
+let sumForOf = 0;
+for (const grade of grades) {
+    console.log(`Grade: ${grade}`); // Grade: 10, Grade: 9, ..., Grade: 11
+    sumForOf += grade;
+}
+console.log(`Sum of grades using for...of: ${sumForOf}`); // Sum of grades using for...of: 66
+console.log(`Average of grades using for...of: ${(sumForOf / grades.length).toFixed(2)}`); // Average of grades using for...of: 6.00
+
+const numbers = [100, 200, 300, 400, 500, 600];
+for(let i = numbers.length - 1; i >= 0; i--) {
+    console.log(`Number: ${numbers[i]}`); // Number: 600, Number: 500, ..., Number: 100
+}
+
+for(let i = numbers.length - 1; i >= 0; i -= 2) {
+    console.log(`Number with step 2: ${numbers[i]}`); // Number with step 2: 600, Number with step 2: 400, Number with step 2: 200
+}
+
+for(let i = numbers.length - 1; numbers[i] > 300; i -= 2) {
+    console.log(`Number greater than 300: ${numbers[i]}`); // Number greater than 300: 600, Number greater than 300: 400
+}
+
+let evenNumbers = [];
+for (let i = 0; i <= 100; i += 2) {
+    evenNumbers.push(i);
+}
+console.log(`Even numbers from 0 to 100: ${evenNumbers}`); // Even numbers from 0 to 100: 0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98
+
+const emptyArray = [,,,];
+console.log(emptyArray.length)
+console.log(emptyArray[0])
+console.log(emptyArray[1])
+console.log(emptyArray[2])
+emptyArray.push(1);
+console.log(emptyArray.length) // 4
+console.log(emptyArray[0]) // undefined
+console.log(emptyArray[1]) // undefined
+console.log(emptyArray[2]) // undefined
+console.log(emptyArray[3]) // 1
+
+emptyArray.pop();
+console.log(emptyArray.length) // 3
+
+const names = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy'];
+
+const names1 = names.slice(0, names.length / 2)
+const names2 = names.slice(names.length / 2)
+console.log(`First half of names: ${names1}`); // First half of names: Alice,Bob,Charlie,David,Eve
+console.log(`Second half of names: ${names2}`); // Second half of names: Frank,Grace,Heidi,Ivan,Judy
+// Indexing starts at 0, so the first element is at index 0 and the last element is at index names.length - 1
+
+console.log(`The array: ${names}`); // The array: Alice,Bob,Charlie,David,Eve,Frank,Grace,Heidi,Ivan,Judy 
+names.splice(1, 2, 'Zoe', 'Liam', 'Mia');
+console.log(`Updated names: ${names}`); // Updated names: Alice,Zoe,Liam,Mia,David,Eve,Frank,Grace,Heidi,Ivan,Judy
+// The first argument is the index where to start removing elements, the second argument is the number of elements to remove, and the rest are the elements to add
+
+
+const roomJavaScript = ['Alice', 'Bob', 'Charlie', 'David', 'Eve'];
+const roomPython = ['Frank', 'Grace', 'Heidi', 'Ivan', 'Judy'];
+const unifiedRooms = roomJavaScript.concat(roomPython);
+console.log(`Unified rooms: ${unifiedRooms}`); // Unified rooms: Alice,Bob,Charlie,David,Eve,Frank,Grace,Heidi,Ivan,Judy
+// The concat method combines two or more arrays into a new array
+
+const concatTest = roomJavaScript.concat(roomPython, true);
+console.log(`Concat test: ${concatTest}`); // Concat test: Alice,Bob,Charlie,David,Eve,Frank,Grace,Heidi,Ivan,Judy,true
+console.log(`Last element type: ${typeof concatTest[concatTest.length - 1]}`); // Last element type: boolean
+
+const classMembers = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy'];
+const gradesClass = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+const classList = [classMembers, gradesClass];
+console.log(`Class list: ${classList[0][1]}`); // Class list: Bob
+console.log(`Class list: ${classList[1][1]}`); // Class list: 9
+
+function getMedia(name) {
+    if (classMembers.includes(name)) {
+        const index = classMembers.indexOf(name);
+        return gradesClass[index];
+    } else {
+        return `Student ${name} not found.`;
+    }
+}
+
+console.log(`Media of Alice: ${getMedia('Alice')}`); // Media of Alice: 10
+console.log(`Media of Eduardo: ${getMedia('Eduardo')}`); // Media of Eduardo: Student Eduardo not found.
+
+// Unstructured way to get media
+function getMediaUnstructured(name) {
+    if (classMembers.includes(name)) {
+        const [members, grades] = classList;  
+        const index = members.indexOf(name);
+        return grades[index];
+    } else {
+        return `Student ${name} not found.`;
+    }
+}
+
+console.log(`Media of Alice: ${getMediaUnstructured('Alice')}`); // Media of Alice: 10
+console.log(`Media of Eduardo: ${getMediaUnstructured('Eduardo')}`); // Media of Eduardo: Student Eduardo not found.
+
+=== arrow-functions.js ===
+const studentFailed = (finalGrade, absence) => {
+  if (finalGrade < 7 && absence > 4) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+console.log(studentFailed(6, 5)); // true
+console.log(studentFailed(8, 2)); // false
+
+const showName = (name) => name;
+
+console.log(showName('Eduardo')); // Eduardo
+
+=== boolean-type.js ===
+const student = 'Eduardo';
+const isAproved = true;
+
+if(isAproved === true){
+    console.log(`${student} is approved!`);
+} else {
+    console.log(`${student} is not approved!`);
+}
+
+if(isAproved){
+    console.log(`${student} is approved!`);
+} else {
+    console.log(`${student} is not approved!`);
+}
+
+if(student === 'Eduardo'){
+    console.log(`Hello ${student}! you are a student!`);
+} else{
+    console.log(`Who are you?`);
+}
+
+=== clone-spread.js ===
+const gradeList = [10, 9, 8];
+const newGradeList = gradeList; // Shallow copy of gradeList (just a reference)
+newGradeList.push(7, 6, 5); // Modifying newGradeList will also modify gradeList
+console.log(`Grade List: ${gradeList}`); 
+console.log(`New Grade List: ${newGradeList}`); 
+
+
+const newGradesListSpread = [...gradeList, 8, 4, 7, 6, 5]; // Using spread operator to create a new array with additional grades
+// This does not modify the original gradeList
+console.log(`Grades List with Spread: ${newGradesListSpread}`); 
+
+// Cloning primitive values does not affect the original.
+const originalValue = 10;
+let clonedValue = originalValue; // Cloning a primitive value
+clonedValue += 5; // Modifying clonedValue does not affect originalValue
+console.log(`Original Value: ${originalValue}`); // Original Value: 10
+console.log(`Cloned Value: ${clonedValue}`); // Cloned Value: 15
+
+
+
+
+=== coersion.js ===
+console.log("Number('123') ", Number('123')); // Converts string to number, returns 123
+console.log("Number('abc') ", Number('abc')); // Converts string to number, returns NaN (Not a Number)
+console.log("Number('123abc') ", Number('123abc')); // Converts string to number, returns NaN (Not a Number)
+console.log("Number('') ", Number('')); // Converts empty string to number, returns 0
+console.log("Number('nan') ", Number('nan')); // Converts string to number, returns NaN (Not a Number)
+console.log("Number(undefined) ", Number(undefined));
+console.log("Number('0x1A') ", Number('0x1A')); // Converts hexadecimal string to number, returns 26
+console.log("Number('0b1010') ", Number('0b1010')); // Converts binary string to number, returns 10
+
+console.log("parseInt('4.5') ", parseInt('4.5')); // Parses string to integer, returns 4
+console.log("parseInt('4.5', 10) ", parseInt('4.5', 10)); // Parses string to integer with base 10, returns 4
+console.log("parseInt('4.5', 2) ", parseInt('4.5', 2)); // Parses string to integer with base 2, returns NaN (Not a Number)
+console.log("parseInt('4.5', 16) ", parseInt('4.5', 16)); // Parses string to integer with base 16, returns 4
+
+console.log("parseFloat('4') ", parseFloat('4')); // Parses string to float, returns 4
+console.log("parseFloat('4.5') ", parseFloat('4.5')); // Parses string to float, returns 4.5
+console.log("parseFloat('4.5abc') ", parseFloat('4.5abc')); // Parses string to float, returns 4.5
+console.log("parseFloat('abc') ", parseFloat('abc')); // Parses string to float, returns NaN (Not a Number)
+
+console.log("typeof +'45' ", typeof +'45'); // Converts string to number using unary plus, returns 'number'
+console.log("typeof -'45' ", typeof -'45'); // Converts string to number using unary minus, returns 'number'
+console.log("typeof +true ", typeof +true); // Converts boolean to number using unary plus, returns 'number'
+console.log("typeof -true ", typeof -true); // Converts boolean to number using unary minus, returns 'number'
+
+console.log("String(2) ", String(2), typeof String(2)); // Converts number to string, returns '2'
+console.log("String(undefined)", String(undefined), typeof String(undefined)); // Converts undefined to string, returns 'undefined'
+console.log("String(true) ", String(true), typeof String(true)); // Converts boolean to string, returns 'true'
+console.log("String(null) ", String(null), typeof String(null)); // Converts null to string, returns 'null'
+console.log("String([1, 2, 3]) ", String([1, 2, 3]), typeof String([1, 2, 3])); // Converts array to string, returns '1,2,3'
+console.log("String({}) ", String({}), typeof String({})); // Converts object to string, returns '[object Object]'
+console.log("String(Symbol('foo')) ", String(Symbol('foo')), typeof String(Symbol('foo'))); // Converts symbol to string, returns 'Symbol(foo)'
+console.log("String(new Date()) ", String(new Date()), typeof String(new Date())) // Converts date to string, returns current date as string
+
+console.log("'studying JavaScript'.includes('Java')", 'studying JavaScript'.includes('Java')); // true
+
+const text = 'studying JavaScript';
+console.log("text.includes('Java') ", text.includes('Java')); // true
+
+console.log("'PLEASE, DO NOT SHOUT!'.toLowerCase(); ", 'PLEASE, DO NOT SHOUT!'.toLowerCase()); // 'please, do not shout!'
+console.log("'please, do not shout!'.toUpperCase(); ", 'please, do not shout!'.toUpperCase()); // 'PLEASE, DO NOT SHOUT!'
+console.log("'  Hello World!  '.trim(); ", '  Hello World!  '.trim()); // 'Hello World!'
+console.log("'Hello World!'.slice(0, 5); ", 'Hello World!'.slice(0, 5)); // 'Hello'
+console.log("'Hello World!'.substring(0, 5); ", 'Hello World!'.substring(0, 5)); // 'Hello'
+console.log("'Hello World!'.substr(0, 5); ", 'Hello World!'.substr(0, 5)); // 'Hello'
+console.log("'Hello World!'.charAt(0); ", 'Hello World!'.charAt(0)); // 'H'
+console.log("'Hello World!'.indexOf('World'); ", 'Hello World!'.indexOf('World')); // 6
+console.log("'Hello World!'.lastIndexOf('o'); ", 'Hello World!'.lastIndexOf('o')); // 7
+console.log("'Hello World!'.split(' '); ", 'Hello World!'.split(' ')); // ['Hello', 'World!']
+console.log("'Hello World!'.replace('World', 'JavaScript'); ", 'Hello World!'.replace('World', 'JavaScript')); // 'Hello JavaScript!'
+console.log("'Hello World!'.repeat(2); ", 'Hello World!'.repeat(2)); // 'Hello World!Hello World!'
+console.log("'Hello World!'.startsWith('Hello'); ", 'Hello World!'.startsWith('Hello')); // true
+console.log("'Hello World!'.endsWith('World!'); ", 'Hello World!'.endsWith('World!')); // true
+console.log("'Hello World!'.localeCompare('Hello'); ", 'Hello World!'.localeCompare('Hello')); // 1 (greater than)
+console.log("'Hello World!'.localeCompare('Hello World!'); ", 'Hello World!'.localeCompare('Hello World!')); // 0 (equal)
+console.log("'Hello World!'.localeCompare('Hello Universe!'); ", 'Hello World!'.localeCompare('Hello Universe!')); // -1 (less than)
+console.log("'Hello World!'.match(/World/); ", 'Hello World!'.match(/World/)); // ['World']
+console.log("'Hello World!'.search(/World/); ", 'Hello World!'.search(/World/)); // 6 (index of match)
+console.log("[...'Hello World!'.matchAll(/o/g)]; ", [...'Hello World!'.matchAll(/o/g)]); // [['o'], ['o']] (all matches)
+console.log("'Hello World!'.padStart(20, '*'); ", 'Hello World!'.padStart(20, '*')); // '*******Hello World!'
+console.log("'Hello World!'.padEnd(20, '*'); ", 'Hello World!'.padEnd(20, '*')); // 'Hello World!*******'
+console.log("'Hello World!'.toLocaleLowerCase('en-US'); ", 'Hello World!'.toLocaleLowerCase('en-US')); // 'hello world!'
+console.log("'Hello World!'.toLocaleUpperCase('en-US'); ", 'Hello World!'.toLocaleUpperCase('en-US')); // 'HELLO WORLD!'
+console.log("'Hello World!'.toLocaleString('en-US'); ", 'Hello World!'.toLocaleString('en-US')); // 'Hello World!'
+console.log("'Hello World!'.toLocaleDateString('en-US'); ", 'Hello World!'.toLocaleDateString('en-US')); // 'Invalid Date' (not a date)
+
+
+
+=== comparison-operators.js ===
+const isAproved = 0;
+
+if(isAproved === 0){
+    console.log('You are approved!');
+} else{
+    console.log('You are not approved!');
+}
+
+if('0' == 0){
+    console.log('OK! The string "0" is equal to the number 0 when using ==');    
+} else{
+    console.log('Failed!');
+}
+
+if('0' === 0){
+    console.log('Failed!');    
+} else{
+    console.log('OK! The string "0" is not equal to the number 0 when using ===');
+}
+// Always use === to avoid unexpected type coercion
+
+
+// ternary operator
+const aVlue = 50;
+const text = aVlue < 50 ? 'insuficient value' : 'suficiente value';
+console.log(text); // suficient value
+
+// nullish coalescing operator
+const value = null;
+const defaultValue = 'default value';
+const result = value ?? defaultValue; // If value is null or undefined, use defaultValue
+console.log(result); // default value
+
+// Optional chaining operator
+const obj = { a: { b: { c: 42 } } };
+const valueC = obj?.a?.b?.c; // Safely access nested properties
+console.log(valueC); // 42
+
+// If any part of the chain is undefined or null, valueC will be undefined instead of throwing an error
+const valueD = obj?.a?.b?.d; // Accessing a non-existent property
+console.log(valueD); // undefined
+
+// If obj is null or undefined, valueE will also be undefined
+const valueE = obj?.x?.y?.z; // Accessing a non-existent property
+console.log(valueE); // undefined
+
+// If obj is null, valueF will also be undefined
+const valueF = null?.a?.b?.c; // Accessing a property on null
+console.log(valueF); // undefined
+
+// If obj is undefined, valueG will also be undefined
+const valueG = undefined?.a?.b?.c; // Accessing a property on undefined
+console.log(valueG); // undefined
+
+
+
+
+=== data-values.js ===
+const person = {
+    name: 'Eduardo',
+    born: '1985-09-30',
+    phoneNumbers: ['5567999999999', '5567888888888']
+}
+
+console.log(`Person phone numbers: ${person.phoneNumbers}`);
+console.log(`First phone number: ${person.phoneNumbers[0]}`);
+
+person.address = {
+    street: 'Joseph Climber',
+    number: '12-a'
+};
+
+console.log(person);
+
+person.born = new Date(1985, 9, 30);
+
+console.log(person);
+
+/*
+🧠 Why new Date(1985, 9, 30) gives October, not September
+- In JavaScript, months are zero-indexed when using the Date constructor.
+- 0 = January
+- 1 = February
+- ...
+- 9 = October
+- So, new Date(1985, 9, 30) means October 30th, not September 30th.
+
+🌎 What's up with the T04:00:00.000Z part?
+- That’s the time in UTC (Z means Zulu Time).
+- Since you’re likely running this in Brazil, which is UTC−4, JavaScript is converting your local time to UTC for display.
+*/
+
+person.born = new Date(1985, 8, 30);
+
+console.log(person);
+
+const person2 = {
+    name: 'Eduardo',
+    born: '1985-09-30',
+    phoneNumbers: ['5567999999999', '5567888888888'],
+    addresses: [{
+        street: 'Ms Clotilde',
+        number: '71a',
+        complement: ''
+    }]
+}
+
+person2.addresses.push({
+    street: 'Joseph Climber',
+    number: '184a',
+    complement: 'next drugstore'
+});
+
+console.log('Person 2: ', person2);
+
+console.log('Adresses of person 2 that has complement: ', person2.addresses.filter((address) => address.complement)); //truthy
+
+=== estudantes.json ===
+[
+  {
+    "nome":"Olva",
+    "email":"olippini0@deviantart.com",
+    "telefone":[
+      "4733865848",
+      "47933865848"
+    ],
+    "endereco":{
+      "logradouro":"Rua Transport",
+      "numero":"05",
+      "cep":"46140",
+      "complemento":"ap 102"
+    }
+  },
+  {
+    "nome":"Oralle",
+    "email":"orajchert1@clickbank.net",
+    "telefone":[
+      "5896279799",
+      "58996279799"
+    ],
+    "endereco":{
+      "logradouro":"Rua Kedzie",
+      "numero":"89",
+      "cep":"613840"
+    }
+  },
+  {
+    "nome":"Amye",
+    "email":"aranahan2@yellowbook.com",
+    "telefone":[
+      "1918820860",
+      "19918820860"
+    ],
+    "endereco":{
+      "logradouro":"Rua Karstens",
+      "numero":"59",
+      "cep":"627533",
+      "complemento":"ap 401"
+    }
+  },
+  {
+    "nome":"Greer",
+    "email":"gtumielli3@vimeo.com",
+    "telefone":[
+      "9466883489",
+      "94966883489"
+    ],
+    "endereco":{
+      "logradouro":"Rua Algoma",
+      "numero":"077"
+    }
+  },
+  {
+    "nome":"Juliet",
+    "email":"jelphey4@wikipedia.org",
+    "telefone":[
+      "1198123183",
+      "11998123183"
+    ],
+    "endereco":{
+      "logradouro":"Rua Crownhardt",
+      "numero":"07",
+      "cep":"184366"
+    }
+  },
+  {
+    "nome":"Blakeley",
+    "email":"bmccaughran5@blog.com",
+    "telefone":[
+      "7919437785",
+      "79919437785"
+    ],
+    "endereco":{
+      "logradouro":"Rua Stone Corner",
+      "numero":"40429",
+      "cep":"1000"
+    }
+  },
+  {
+    "nome":"Leeann",
+    "email":"lhuckleby6@tuttocitta.it",
+    "telefone":[
+      "9045673092",
+      "90945673092"
+    ],
+    "endereco":{
+      "logradouro":"Rua Center",
+      "numero":"549"
+    }
+  },
+  {
+    "nome":"Tildi",
+    "email":"tmilthorpe7@answers.com",
+    "telefone":[
+      "3149463623",
+      "31949463623"
+    ],
+    "endereco":{
+      "logradouro":"Rua Clyde Gallagher",
+      "numero":"3962"
+    }
+  },
+  {
+    "nome":"Kirby",
+    "email":"kcoard8@squidoo.com",
+    "telefone":[
+      "9291767581",
+      "92991767581"
+    ],
+    "endereco":{
+      "logradouro":"Rua Valley Edge",
+      "numero":"5",
+      "cep":"20195",
+      "complemento":"Venda da tia Zezé"
+    }
+  },
+  {
+    "nome":"Stephine",
+    "email":"smullard9@etsy.com",
+    "telefone":[
+      "5327428873",
+      "53927428873"
+    ],
+    "endereco":{
+      "logradouro":"Rua Ruskin",
+      "numero":"36819",
+      "complemento":"Bloco 16 ap 202"
+    }
+  },
+  {
+    "nome":"Carolina",
+    "email":"ckauschea@reddit.com",
+    "telefone":[
+      "1877479960",
+      "18977479960"
+    ],
+    "endereco":{
+      "logradouro":"Rua Mosinee",
+      "numero":"28672",
+      "cep":"8314",
+      "complemento":"Bar dos coroas"
+    }
+  },
+  {
+    "nome":"Jerrome",
+    "email":"jbletsorb@dmoz.org",
+    "telefone":[
+      "2492442110",
+      "24992442110"
+    ],
+    "endereco":{
+      "logradouro":"Rua Arkansas",
+      "numero":"3983",
+      "complemento":"Mercadinho"
+    }
+  },
+  {
+    "nome":"Emilee",
+    "email":"eempsonc@bloomberg.com",
+    "telefone":[
+      "4775323087",
+      "47975323087"
+    ],
+    "endereco":{
+      "logradouro":"Rua West",
+      "numero":"8"
+    }
+  },
+  {
+    "nome":"Way",
+    "email":"wportmand@census.gov",
+    "telefone":[
+      "9705299694",
+      "97905299694"
+    ],
+    "endereco":{
+      "logradouro":"Rua Rockefeller",
+      "numero":"79",
+      "cep":"81028 CEDEX 9"
+    }
+  },
+  {
+    "nome":"Dorothea",
+    "email":"dmutimere@bizjournals.com",
+    "telefone":[
+      "6804913737",
+      "68904913737"
+    ],
+    "endereco":{
+      "logradouro":"Rua Morrow",
+      "numero":"1"
+    }
+  },
+  {
+    "nome":"Flori",
+    "email":"fbattersbyf@freewebs.com",
+    "telefone":[
+      "2047970414",
+      "20947970414"
+    ],
+    "endereco":{
+      "logradouro":"Rua Forest",
+      "numero":"43",
+      "complemento":"Na frente da quadra de basquete"
+    }
+  },
+  {
+    "nome":"Cecelia",
+    "email":"cmacgrayg@unc.edu",
+    "telefone":[
+      "3569848931",
+      "35969848931"
+    ],
+    "endereco":{
+      "logradouro":"Rua Karstens",
+      "numero":"115",
+      "complemento":"ap 71"
+    }
+  },
+  {
+    "nome":"Xylia",
+    "email":"xandrieuxh@berkeley.edu",
+    "telefone":[
+      "7593785074",
+      "75993785074"
+    ],
+    "endereco":{
+      "logradouro":"Rua Parkside",
+      "numero":"065",
+      "cep":"H65",
+      "complemento":"ap 406"
+    }
+  },
+  {
+    "nome":"Husein",
+    "email":"hbevissi@harvard.edu",
+    "telefone":[
+      "9916828153",
+      "99916828153"
+    ],
+    "endereco":{
+      "logradouro":"Rua Artisan",
+      "numero":"9",
+      "cep":"2281",
+      "complemento":"Depois da trilha"
+    }
+  },
+  {
+    "nome":"Izaak",
+    "email":"ikarbyj@home.pl",
+    "telefone":[
+      "5193301028",
+      "51993301028"
+    ],
+    "endereco":{
+      "logradouro":"Rua Grim",
+      "numero":"480"
+    }
+  }
+]
+
+
+=== expression-functions.js ===
+
+const getInfoStudent = function (name, grade) {
+    return `Student Name: ${name} - Grade: ${grade}`;
+}
+
+console.log(getInfoStudent('John Doe', 8.5)); // Student Name: John Doe - Grade: 8.5
+console.log(getInfoStudent('Jane Smith', 9.2)); // Student Name: Jane Smith - Grade: 9.2
+
+// Error - hoisting problem
+console.log(getInfoStudentBefore('John Doe', 8.5)); // Student Name: John Doe - Grade: 8.5
+console.log(getInfoStudentBefore('Jane Smith', 9.2)); // Student Name: Jane Smith - Grade: 9.2
+
+const getStudentBefore = function (name, grade) {
+    return `Student Name: ${name} - Grade: ${grade}`;
+}
+
+=== filter-student.js ===
+const students = require('./estudantes.json');
+
+function filterByProperty(list, property){
+    return list.filter((student) => !student.endereco.hasOwnProperty(property));
+}
+
+console.log(filterByProperty(students, 'cep'));
+
+=== filter.js ===
+const students = ['Alice', 'Bob', 'Charlie', 'David', 'Eve'];
+const averageGrades = [10, 9, 8, 7, 6];
+
+const reprovedStudents = students.filter((student, index) => {
+    return averageGrades[index] < 7;
+});
+
+const reprovedStudentsUnderline = students.filter((_, index) => {
+    return averageGrades[index] < 7;
+});
+
+console.log(`Reproved Students: ${reprovedStudents}`); // Reproved Students: Eve
+console.log(`Reproved Students (Underline): ${reprovedStudentsUnderline}`); // Reproved Students (Underline): Eve
+
+const aprovedGrades = averageGrades.filter((grade) => grade >= 7);
+console.log(`Aproved Grades: ${aprovedGrades}`); // Aproved Grades: 10,9,8,7
+
+=== find-student.js ===
+const students = require('./estudantes.json');
+
+function findInfo(list, key, value){
+    return list.find((student) => student[key].includes(value));
+}
+
+console.log(findInfo(students, 'nome', 'Juliet'));
+
+=== for-each.js ===
+let grades = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+let sumOfGrades = 0;
+grades.forEach(function(grade) {
+    sumOfGrades += grade;
+});
+
+let averageGrade = sumOfGrades / grades.length;
+console.log(`Average grade: ${averageGrade.toFixed(2)}`); // Average grade: 5.50
+
+let gradesExp = [7.5, 8.0, 10, 6.5, 5.0];
+
+let sumOfGradesExp = 0;
+const sumExp = function (grade) {
+    sumOfGradesExp += grade;
+}
+
+gradesExp.forEach(sumExp);
+
+let averageGradeExp = sumOfGradesExp / gradesExp.length;
+console.log(`Average grade (expression): ${averageGradeExp.toFixed(2)}`); // Average grade: 7.40
+
+const numberList = [1, 2, 3, 4, 5];
+let sumArrow = 0;
+ 
+numberList.forEach(number => sumArrow += number);
+console.log(`Sum of numbers (arrow function): ${sumArrow}`); // Sum of numbers (arrow function): 15
+
+sumArrow = 0; // Resetting sumArrow for the next example
+numberList.forEach(number => {
+    sumArrow += number;
+    console.log(`Current number: ${number}, Running total: ${sumArrow}`);
+});
+console.log(`Final sum of numbers (arrow function with block): ${sumArrow}`); // Final sum of numbers (arrow function with block): 15
+
+
+
+
+
+=== for-in.js ===
+const student = {
+    name: 'Eduardo',
+    born: new Date(1985, 8, 30),
+    phoneNumbers: ['5567999999999', '5567888888888'],
+    addresses: [{
+        street: 'Ms Clotilde',
+        number: '71a',
+        complement: ''
+    },
+    {
+        street: 'Joseph Climber',
+        number: '184a',
+        complement: 'next the drugstore'
+    }]
+}
+
+for(let key in student){
+    const type = typeof student[key]; // there is no array type.
+    if(type !== 'object' && type !== 'function'){
+        console.log(`The key is ${key}, the value is ${student[key]}`);
+    }
+}
+
+=== functions.js ===
+
+function getInfoStudent(name, grade) {
+    return `Student Name: ${name} - Grade: ${grade}`;
+}
+
+console.log(getInfoStudent('John Doe', 8.5)); // Student Name: John Doe - Grade: 8.5
+console.log(getInfoStudent('Jane Smith', 9.2)); // Student Name: Jane Smith - Grade: 9.2
+
+function division(a, b) {    
+    a / b;
+}
+const resultOfDivision = division(10, 2);
+console.log(`Result of division: ${resultOfDivision}`); // Result of division: undefined
+
+=== json-import.js ===
+const student = require('./student.json');
+
+console.log(student);
+
+console.log('Keys of student: ', Object.keys(student));
+
+const studentString = JSON.stringify(student);
+console.log(studentString);
+
+const studentObj = JSON.parse(studentString);
+console.log(studentObj);
+
+const originalObj = { key: 'value' };
+const referenceCopy = originalObj;
+
+referenceCopy.key = 'newValue';
+console.log(originalObj.key); // Output: newValue
+
+
+const deepCopy = JSON.parse(JSON.stringify(originalObj));
+deepCopy.key = 'deepCopy';
+console.log(originalObj.key);
+console.log(deepCopy.key);
+
+
+=== logic-operators.js ===
+const finalGrade = 7;
+const absence = 5;
+
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+const ask = (question) => new Promise(resolve => rl.question(question, resolve));
+
+(async () => {
+  this.finalGrade = await ask("What's the final grade? ");
+  this.absence = await ask("Absence? ");  
+    // Using logical operators to determine if the student is approved
+    // Logical AND (&&) and OR (||) operators are used to combine conditions
+    if(finalGrade < 7 || absence > 4){
+        console.log('Student is not approved');
+    } else {
+        console.log('Student is approved');
+    }
+
+    if(finalGrade < 7 && absence > 4){
+        console.log('Student is not approved');
+    } else {
+        console.log('Student is approved');
+    }
+
+  rl.close();
+})();
+
+const warning = 0;
+
+if(absence >= 2 && !warning){
+    console.log('Bonus and you have a warning!');
+} else {
+    console.log('No bonus and no warning!');
+}
+
+/*
+Truthy and Falsy values in JavaScript:
+
+- Falsy values: false, 0, '', null, undefined, NaN
+- Truthy values: All other values that are not falsy, including non-empty strings, non-zero numbers, objects, arrays, etc.
+- The logical NOT operator (!) can be used to negate a value, converting truthy values to false and falsy values to true.
+- The logical AND operator (&&) returns the first falsy value or the last truthy value.
+- The logical OR operator (||) returns the first truthy value or the last falsy value.
+- The logical operators can be used to control the flow of the program based on conditions.
+- The logical operators can also be used to set default values, for example: const value = userInput || 'default'; will set value to 'default' if userInput is falsy.
+- The logical operators can be used to combine multiple conditions, for example: if (condition1 && condition2) { ... } will execute the block if both conditions are true.
+- The logical operators can be used to create complex conditions, for example: if (condition1 || (condition2 && condition3)) { ... } will execute the block if either condition1 is true or both condition2 and condition3 are true.
+- The logical operators can be used to short-circuit evaluation, meaning that if the first condition is sufficient to determine the result, the second condition will not be evaluated.
+- The logical operators can be used to create conditional expressions, for example: const result = condition ? valueIfTrue : valueIfFalse; will assign valueIfTrue to result if condition is true, otherwise it will assign valueIfFalse.
+- The logical operators can be used to create default values, for example: const value = userInput || 'default'; will assign 'default' to value if userInput is falsy.
+- The logical operators can be used to create fallback values, for example: const value = user
+
+if (true)
+if ({})
+if ([])
+if (42)
+if ("foo")
+if (new Date())
+if (-42)
+if (3.14)
+if (-3.14)
+if (Infinity)
+if (-Infinity)
+
+*/
+
+=== map.js ===
+const grades = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+const updatedGrades = grades.map((grade) => grade + 1 >= 10 ? 10 : grade + 1);
+
+console.log(`Updated Grades: ${updatedGrades}`); // Updated Grades: 10,10,9,8,7,6,5,4,3,2
+
+const names = ['Alice', 'Bob', 'Charlie'];
+const upperCaseNames = names.map((name) => name.toUpperCase());
+console.log(`Uppercase Names: ${upperCaseNames}`); // Uppercase Names: ALICE,BOB,CHARLIE
+
+=== methods.js ===
+const student = {
+    name: 'Eduardo',
+    born: new Date(1985, 8, 30),
+    phoneNumbers: ['5567999999999', '5567888888888'],
+    addresses: [{
+        street: 'Ms Clotilde',
+        number: '71a',
+        complement: ''
+    },
+    {
+        street: 'Joseph Climber',
+        number: '184a',
+        complement: 'next the drugstore'
+    }],
+    averageGrade: 7.6,
+    isAproved: function () {
+        return this.averageGrade >= 7;
+    },
+    isAprovedArrow: () => this.averageGrade >= 7, // this doesn't refers to the object
+    arrowThis: () => this // empty object
+}
+
+console.log('Student: ', student);
+console.log('Is approved? ', student.isAproved());
+console.log('Is approved (arrow function)? ', student.isAprovedArrow()); 
+console.log('this (arrow function)? ', student.arrowThis()); 
+
+=== number-types.js ===
+const firstNumber = 8;
+const secondNumber = 6.3;
+const thirdNumber = -2;
+const fourthNumberString = '5';
+const fifthNumber = 4;
+
+const wrongSum = firstNumber + secondNumber + thirdNumber + fourthNumberString + fifthNumber;
+console.log('Wrong sum: ', wrongSum); // This will output a string concatenation (12.354, 12,35 concatenated with 5) instead of a numerical sum
+
+const correctSum = firstNumber + secondNumber + thirdNumber + Number.parseInt(fourthNumberString) + fifthNumber;
+console.log('Correct sum: ', correctSum); // This will output the correct numerical sum (21.3)
+
+const mean = correctSum / 5;
+console.log('Mean: ', mean); // This will output the mean of the numbers (4.26)
+console.log('Fixed mean: ', mean.toFixed(1)); // This will output the mean rounded to two decimal places (4.3)
+
+const sextNumber = 3;
+const seventhWrongNumber = 'a';
+const eighthNumber = '1.5';
+
+const wrongMultiplication = sextNumber * seventhWrongNumber;
+console.log('Wrong multiplication: ', wrongMultiplication); // This will output NaN (Not a Number) because 'a' cannot be converted to a number
+console.log(Number.isNaN(wrongMultiplication)); // This will return true, indicating that the result is NaN
+console.log(isNaN(wrongMultiplication)); // This will also return true, indicating that the result is NaN
+console.log(isNaN(seventhWrongNumber)); // This will return true, indicating that 'a' can not be evaluated as a number if the code tries to convert to number
+console.log(Number.isNaN(seventhWrongNumber)); // This will return false, indicating that 'a' is not a number
+console.log(Number.isNaN(eighthNumber)); // This will return false, indicating that '1.5' is a string that can be converted to a number
+
+console.log('Correct multiplication int * str: ', firstNumber * fourthNumberString); // This will output the correct multiplication (4.5)
+console.log('Hexadecimal number: ', 0xA); // 0xA is 10 in decimal
+console.log('Binary number: ', 0b1010); // 0b1010 is 10 in decimal
+console.log('Octal number: ', 0o12); // 0o12 is 10 in decimal
+
+=== object-methods.js ===
+const student = {
+    name: 'Eduardo',
+    born: new Date(1985, 8, 30),
+    phoneNumbers: ['5567999999999', '5567888888888'],
+    addresses: [{
+        street: 'Ms Clotilde',
+        number: '71a',
+        complement: ''
+    },
+    {
+        street: 'Joseph Climber',
+        number: '184a',
+        complement: 'next the drugstore'
+    }]
+}
+
+const keys = Object.keys(student);
+console.log(keys);
+
+if(!keys.includes('title')){
+    console.error('The title is necessary.');
+}
+
+console.log('Values: ', Object.values(student));
+console.log('Entries: ', Object.entries(student));
+
+
+const originalObj = { a: 1, b: 2 };
+const toCopyObj = { b: 3, c: 4 };
+
+const fusedObj = Object.assign({}, originalObj, toCopyObj);
+
+console.log('Fused object with Object.assign(): ', fusedObj);
+// Output: { a: 1, b: 3, c: 4 }
+
+const myObj = {};
+
+Object.defineProperty(myObj, 'notEnumerableProperty', {
+  value: 42,
+  enumerable: false
+});
+
+for (let key in myObj) {
+  console.log(key); // Output: nothing because to enter in the for loop is necessary to be enumerable.
+}
+
+const myObjE = {};
+
+Object.defineProperty(myObjE, 'enumerableProperty', {
+  value: 65,
+  enumerable: true
+});
+
+for (let key in myObjE) {
+  console.log(key); // Output: nothing because to enter in the for loop is necessary to be enumerable.
+}
+
+console.log('enumerableProperty: ', myObjE.enumerableProperty);
+
+=== objects.js ===
+const person = {
+    name: 'Eduardo',
+    age: 39,
+    cpf: '12345678912',
+    class: 'JavaScript'
+}
+
+console.log(person);
+
+console.log(`Peron -> name: ${person.name}, age: ${person.age}, cpf: ${person.cpf}, class: ${person.class}`);
+
+console.log(`First three digits of cpf: ${person.cpf.substring(0,3)}`);
+
+function showInfoPerson(person, info){
+    console.log(person[info]);
+}
+
+showInfoPerson(person, 'name');
+showInfoPerson(person, 'phoneNumber');
+
+person.phoneNumber = "+5567999999999";
+showInfoPerson(person, 'phoneNumber');
+
+const isDeleted = delete person.phoneNumber;
+showInfoPerson(person, 'phoneNumber');
+console.log(`type of isDeleted: ${typeof isDeleted}, value: ${isDeleted}`);
+
+
+const isDeleted2 = delete person.phoneNumber;
+showInfoPerson(person, 'phoneNumber');
+console.log(`type of isDeleted2: ${typeof isDeleted2}, value: ${isDeleted2}`);
+
+Object.defineProperty(person, "phoneNumber", {
+  value: "123-4567",
+  configurable: false
+});
+
+console.log(delete person.phoneNumber); // ❌ false
+console.log(person.phoneNumber);        // ✅ "123-4567"
+
+=== README.md ===
+# studying-js
+Studying JavaScript.
+
+
+=== reduce.js ===
+const JavaScriptClassRoom = [7, 8, 9, 10, 6, 5, 4, 3, 2, 1];
+const PythonClassRoom = [10, 9, 8, 7, 6.5, 5, 4, 3, 2, 1];
+const JavaClassRoom = [10, 9, 8.5, 7, 6, 5, 4, 3, 2.8, 1];
+
+function getAverageGrade(classRoom) {
+    const sumOfGrades = classRoom.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    return sumOfGrades / classRoom.length;
+}
+
+const averageJavaScript = getAverageGrade(JavaScriptClassRoom);
+console.log(`Average JavaScript Grade: ${averageJavaScript.toFixed(2)}`); // Average JavaScript Grade: 5.50
+
+const averagePython = getAverageGrade(PythonClassRoom);
+console.log(`Average Python Grade: ${averagePython.toFixed(2)}`); // Average Python Grade: 5.55
+
+const averageJava = getAverageGrade(JavaClassRoom);
+console.log(`Average Java Grade: ${averageJava.toFixed(2)}`); // Average Java Grade: 5.63
+
+
+
+=== scope.js ===
+let student;
+
+if(1 > 0){
+    student = 'John Doe';
+    console.log(student);
+}
+student = 'Jane Smith';
+console.log(student);
+
+
+
+if(1 > 0){
+    let teacher = 'Mr. Brown';
+    console.log(teacher);
+}
+//console.log(teacher); // teacher is not defined here, as it was declared with let inside the if block
+
+if(1 > 0){
+    let teacher = 'Ms. Blue';
+    console.log(teacher);
+}   
+//teacher = 'Ms. Green'; //It creats a new global variable with var 
+console.log(teacher);
+
+const name = 'Alice';
+console.log(`Hello, my name is ${name}.`);
+
+
+
+
+
+=== set.js ===
+
+const names = ['Eduardo', 'Eduardo', 'Ana', 'Scarlett', 'Scarlett'];
+
+console.log('Original name list: ', names);
+
+// const namesSet = new Set(names);
+// const updatedNameList = [...namesSet];
+
+const updatedNameList = [... new Set(names)];
+
+console.log('The name list with no repetitions: ', updatedNameList);
+
+=== sort-students.js ===
+const students = require('./estudantes.json');
+
+function order(list, property){
+    return list.sort((a, b) => {
+        if(a[property] < b[property]) return -1;
+        if(a[property] > b[property]) return 1;
+        return 0;
+    });
+}
+
+console.log(order(students, 'nome'));
+
+=== spread-operator.js ===
+const student = {
+    name: 'Eduardo',
+    born: new Date(1985, 8, 30),
+    phoneNumbers: ['5567999999999', '5567888888888'],
+    addresses: [{
+        street: 'Ms Clotilde',
+        number: '71a',
+        complement: ''
+    },
+    {
+        street: 'Joseph Climber',
+        number: '184a',
+        complement: 'next the drugstore'
+    }]
+}
+
+function showPhoneNumbers(number1, number2){
+    console.log('Number 1: ', number1);
+    console.log('Number 2: ', number2);
+}
+
+showPhoneNumbers(student.phoneNumbers[0], student.phoneNumbers[1]);
+showPhoneNumbers(...student.phoneNumbers);
+
+const deliverInfo = {
+    to: student.name,
+    ...student.addresses[0]
+}
+
+console.log('deliverInfo: ', deliverInfo);
+
+
+const wizard = {
+ nome: "Gandalf",
+ classe: "wizard"
+}
+
+const warrior = {
+ nome: "Aragorn",
+ classe: "warrior"
+}
+ 
+const ranger = {
+ nome: "Legolas",
+ classe: "ranger"
+}
+
+const characters = { ...wizard, ...warrior, ...ranger }; // JavaScript overwrites the keys with the same name with each occurrence, 
+// making the final result only the last object declared within the object characters
+console.log(characters);
+
+/*
+Although practical, using spread syntax can generate a lot of processing, 
+so it should be used with caution in the case of loops or recursive functions.
+*/
+
+=== string-type.js ===
+const student = "Carol";
+const teacher = "Mr. Smith";
+const greeting = "Our slogan is 'Learn and Grow'";
+const quote = `Ju says: "Our slogan is 'Learn and Grow'"`;
+
+console.log(greeting);
+console.log(quote);
+
+console.log('The student is: ' + student);
+
+console.log(`The teacher is: ${teacher}`); // Template literals allow for multi-line strings and string interpolation
+
+
+// Unicode patterns - UTF-16 by default, that is 16 bits. (\u prefix) can be used to represent characters in JavaScript strings.
+// Here are some examples of Unicode characters:
+const dollarSign = '\u0024'
+const aCapitalLetter = '\u0041'
+const tic = '\u2705'
+const hiragana = '\u3041'
+
+console.log(`The dollar sign is: ${dollarSign}`);
+console.log(`The type of ${dollarSign} is: ${typeof dollarSign}`);
+console.log(`The capital letter A is: ${aCapitalLetter}`);
+console.log(`The tic mark is: ${tic}`);
+console.log(`The hiragana character is: ${hiragana}`);
+
+
+const school = "CodeMonster7.Academy";
+let schoolUpperCase = "";
+
+for (let i = 0; i < school.length; i++) {
+    if (school[i] === ".") {
+        schoolUpperCase += " ";
+    } else {
+        schoolUpperCase += school[i].toUpperCase();
+    }
+}
+
+console.log(`The school name is: ${schoolUpperCase}`); // The school name is: CODEMONSTER7 ACADEMY
+
+=== student.json ===
+{
+  "name": "Ana",
+  "age": 32,
+  "cpf": "23423423423",
+  "email": "ana@email.com",
+  "phoneNumbers": ["551198745632", "551198745633"],
+  "address": {
+    "street": "Rua Joseph Climber",
+    "number": "45",
+    "complement": "apto 43"
+  }
+}
+
+
+
+
+=== summary.js ===
+const fs = require('fs');
+const path = require('path');
+
+const inputDir = './'; // Change to your target directory
+const outputFile = './summary.txt';
+
+fs.readdir(inputDir, (err, files) => {
+  if (err) {
+    console.error('Error reading directory:', err);
+    return;
+  }
+
+  let outputContent = '';
+
+  files.forEach(file => {
+    const filePath = path.join(inputDir, file);
+    const stats = fs.statSync(filePath);
+
+    if (stats.isFile()) {
+      const content = fs.readFileSync(filePath, 'utf8');
+      outputContent += `=== ${file} ===\n${content}\n\n`;
+    }
+  });
+
+  fs.writeFileSync(outputFile, outputContent, 'utf8');
+  console.log(`Content written to ${outputFile}`);
+});
+
+=== symbol-type.js ===
+// Symbols unlock powerful patterns for unique keys, metadata, and meta-programming. 
+// They are immutable, unique, and can be used to create private properties in objects.
+// Symbols are a primitive data type introduced in ES6 (ECMAScript 2015).
+// They are used to create unique identifiers for object properties, which can help avoid name collisions in large applications or libraries.
+// Symbols are not enumerable, meaning they do not show up in for...in loops or Object.keys().
+// They can be used as keys for object properties, allowing for private or hidden properties.
+// Symbols can be created using the Symbol() function, and they can also be registered in a global symbol registry using Symbol.for().
+// The Symbol.for() method allows you to create or retrieve a symbol from a global registry,
+// which can be useful for sharing symbols across different parts of an application or even across different modules.
+// Symbols can also be used to define well-known symbols, which are built-in symbols that provide custom behavior for certain operations in JavaScript, such as iteration, property access, and object conversion.
+// They are particularly useful for creating unique keys in objects, avoiding name collisions, and implementing private properties or methods in classes.
+
+// Symbols in JavaScript
+
+const sym = Symbol("id");
+console.log('Type of sym: ', typeof sym); // "symbol"
+console.log(sym.description); // "id"
+console.log(sym.toString()); // "Symbol(id)"
+
+const sym2 = Symbol("id");
+console.log(sym === sym2); // false, each Symbol is unique
+
+const ID = Symbol("id");
+const user = {
+  name: "Alice",
+  [ID]: 42
+};
+
+console.log(user[ID]); // 42
+
+for (let key in user) {
+  console.log(key); // only "name", symbol keys skipped
+}
+
+console.log(Object.getOwnPropertySymbols(user));  
+// [ Symbol(id) ]
+
+const symGlobal1 = Symbol.for("app.id");
+const symGlobal2 = Symbol.for("app.id");
+console.log(symGlobal1 === symGlobal2);  // true
+console.log(Symbol.keyFor(symGlobal1));  // "app.id"
+
+/*
+Well-Known Symbols
+JavaScript provides built-in symbols—so-called well-known symbols—that customize language behavior. A few examples:
+| Symbol                    | Purpose                                  | 
+| Symbol.iterator           | Default iterator for for…of loops        | 
+| Symbol.toPrimitive        | Customizes object → primitive conversion | 
+| Symbol.isConcatSpreadable | Controls spreading in Array.concat()     | 
+*/
+
+const iterable = {
+  *[Symbol.iterator]() {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+};
+
+for (const value of iterable) {
+  console.log(value); // 1, 2, 3
+}
+
+const primitive = {
+    [Symbol.toPrimitive](hint) {
+        if (hint === "string") return "Custom String";
+        if (hint === "number") return 42;
+        return true;
+    }
+};
+console.log(String(primitive)); // "Custom String" 
+console.log(Number(primitive)); // 42
+console.log(primitive + 1); // 43 (default conversion to number)
+
+const concatSpreadable = {
+  [Symbol.isConcatSpreadable]: true,
+  length: 2,
+  0: "a",
+  1: "b"
+};
+const arr = ["x", "y"].concat(concatSpreadable);
+console.log(arr); // ["x", "y", "a", "b"]
+
+const nonConcatSpreadable = {
+  length: 2,
+  0: "c",
+  1: "d"
+};
+const arr2 = ["x", "y"].concat(nonConcatSpreadable);
+console.log(arr2); // ["x", "y", { length: 2, 0: "c", 1: "d" }]
+
+class Range {
+  constructor(from, to) { 
+    this.from = from; 
+    this.to = to; 
+}
+  *[Symbol.iterator]() {
+    for (let v = this.from; v <= this.to; v++) yield v;
+  }
+}
+
+for (let n of new Range(1, 3)) {
+  console.log(n);  // 1, 2, 3
+}
+
+
+=== this.js ===
+
+let globalVar = 'global-var';
+
+const regularFunction = function (){
+    let blockVar = 'block-1-var';
+    console.log(globalVar, blockVar);
+}
+
+const arrowFunction = () => {
+    let blockVar2 = 'block-2-var';
+    // console.log(globalVar, blockVar, blockVar2); // ReferenceError: blockVar is not defined
+    console.log(globalVar, blockVar2);
+    console.log('arrowFunction this: ', this);
+    this.variable1 = 'aaaaa';
+    console.log('this.variable1: ', this.variable1);
+}
+
+regularFunction();
+arrowFunction();
+
+const painel = {
+    titlePainel: 'Painel 1',
+    showRegularFunction() { // it can be showRegularFunction: function () { 
+        setTimeout(() => {
+            console.log("regular - The title is: ", this.titlePainel);
+        }, 500)
+    },
+    arrowThis: () => this, // empty object
+    configureArrowThis: () => {
+        this.attr1 = 'Atribute one';
+        console.log('this.attr1 = ', this.attr1);
+    }
+};
+
+painel.showArrowFunction = () => {
+    setTimeout((titlePainel) => {
+        console.log("arrow -  The title is: ", titlePainel);
+    }, 500, painel.titlePainel); // we must initialize the object first
+};
+
+console.log('arrowThis: ', painel.arrowThis());
+painel.configureArrowThis();
+painel.showRegularFunction();
+painel.showArrowFunction();
+
+=== variables.js ===
+const student = 'John Doe';
+let teacher; // let allows for reassignment, it alocates memory for the variable, we can not do it with const
+console.log(typeof student);
+teacher = 'Mr. Brown';
+console.log(student, teacher);
+// Demonstrating different types of variables
+
+const aStringNumber = '123';
+const aNumber = 42;
+const anotherNumber = 3.14;
+const aBoolean = true;
+const aNan = NaN; // Not a Number (result of invalid arithmetic operation) - NaN is a number type in JavaScript
+const aNull = null; // Null value (intencional absence of value or object) typyof null is 'object' in JavaScript, which is a known quirk of the language (js old version problem)
+const aUndefined = undefined; // Undefined value
+console.log(typeof aStringNumber, typeof aNumber, typeof anotherNumber, 
+    typeof student, typeof teacher, typeof aBoolean, typeof aNan,
+    typeof aNull, typeof aUndefined);
+
+let declaredVariable;
+console.log(declaredVariable + 3); // This will output NaN because declaredVariable is undefined, and adding undefined to a number results in NaN
+console.log('aNull + 4: ', aNull + 4); // This will output 4 because null is treated as 0 in arithmetic operations
+console.log('aUndefined + 5: ', aUndefined + 5); // This will output NaN because undefined is not a number, and adding it to a number results in NaN
+console.log('aStringNumber + aNumber: ', aStringNumber + aNumber); // This will output '12342' because aStringNumber is a string, and adding a string to a number results in string concatenation
+console.log('aStringNumber * aNumber: ', aStringNumber * aNumber); // This will output 5166 because aStringNumber is a string that can be converted to a number, and multiplying it by a number results in a numerical operation
+console.log('aStringNumber - aNumber: ', aStringNumber - aNumber); // This will output -41 because aStringNumber is a string that can be converted to a number, and subtracting it from a number results in a numerical operation
+console.log('aStringNumber / aNumber: ', aStringNumber / aNumber); // This will output 2.9285714285714284 because aStringNumber is a string that can be converted to a number, and dividing it by a number results in a numerical operation
+console.log('aStringNumber % aNumber: ', aStringNumber % aNumber); // This will output 3 because aStringNumber is a string that can be converted to a number, and the modulus operation results in the remainder of the division
+console.log('aStringNumber ** aNumber: ', aStringNumber ** aNumber); // This will output 1.5151515151515151e+81 because aStringNumber is a string that can be converted to a number, and raising it to the power of a number results in a numerical operation
+console.log('aStringNumber + aBoolean: ', aStringNumber + aBoolean); // This will output '123true' because aBoolean is converted to a string and concatenated with aStringNumber
+console.log('aStringNumber * aBoolean: ', aStringNumber * aBoolean); // This will output 123 because aBoolean is converted to a number (true becomes 1) and multiplied by aStringNumber
+console.log('aStringNumber - aBoolean: ', aStringNumber - aBoolean); // This will output 122 because aBoolean is converted to a number (true becomes 1) and subtracted from aStringNumber
+console.log('aStringNumber / aBoolean: ', aStringNumber / aBoolean); // This will output 123 because aBoolean is converted to a number (true becomes 1) and divided by aStringNumber
+console.log('aStringNumber % aBoolean: ', aStringNumber % aBoolean); // This will output 0 because aBoolean is converted to a number (true becomes 1) and the modulus operation results in the remainder of the division
+console.log('aStringNumber ** aBoolean: ', aStringNumber ** aBoolean); // This will output 123 because aBoolean is converted to a number (true becomes 1) and raised to the power of aStringNumber
+console.log('aStringNumber + aNan: ', aStringNumber + aNan); // This will output '123NaN' because aNan is converted to a string and concatenated with aStringNumber
+console.log('aStringNumber * aNan: ', aStringNumber * aNan); // This will output NaN because multiplying a string by NaN results in NaN
+console.log('aStringNumber - aNan: ', aStringNumber - aNan); // This will output NaN because subtracting a string by NaN results in NaN
+console.log('aStringNumber / aNan: ', aStringNumber / aNan); // This will output NaN because dividing a string by NaN results in NaN
+console.log('aStringNumber % aNan: ', aStringNumber % aNan); // This will output NaN because the modulus operation with NaN results in NaN
+console.log('aStringNumber ** aNan: ', aStringNumber ** aNan); // This will output NaN because raising a string to the power of NaN results in NaN
+console.log('aStringNumber + aNull: ', aStringNumber + aNull); // This will output '123null' because aNull is converted to a string and concatenated with aStringNumber
+

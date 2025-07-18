@@ -1,0 +1,14 @@
+{
+  "name": "Ana",
+  "age": 32,
+  "cpf": "23423423423",
+  "email": "ana@email.com",
+  "phoneNumbers": ["551198745632", "551198745633"],
+  "address": {
+    "street": "Rua Joseph Climber",
+    "number": "45",
+    "complement": "apto 43"
+  }
+}
+
+
