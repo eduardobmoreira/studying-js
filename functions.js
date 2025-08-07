@@ -11,3 +11,21 @@ function division(a, b) {
 }
 const resultOfDivision = division(10, 2);
 console.log(`Result of division: ${resultOfDivision}`); // Result of division: undefined
+
+
+
+function regularFunction(){
+    const vara1 = "1 Some text.";
+    this.vara2 = "2 Another text.";
+    const arrowFunction = () => {
+        this.vara3 = "3 Arrow function text.";
+
+        console.log(this);    
+        console.log(vara1); 
+        console.log(this.vara2);
+        console.log(this.vara3);
+    };
+    arrowFunction();
+}
+
+regularFunction();
